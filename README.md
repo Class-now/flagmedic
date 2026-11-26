@@ -27,6 +27,15 @@ DECISION: FIX  Measurement is broken; results are not trustworthy until the find
 | Flagsmith API calls per check | **6** (experiment, refresh, results, metrics, warehouse) — no LLM in the loop, so a check costs nothing |
 | Changes made without approval | **0** — every write to Flagsmith or your repo is a proposal a human approves or rejects |
 
+Why it matters, from the SRM demo (`hero_cta`, experiment #559): the results API reported **bold at a 99.8% chance to win** while `srm_p_value` was still `null`. The split was 45.6% / 54.4% against a configured 50/50 (χ² p = 1.6e-6) because the bold variation recorded its exposure only after a lazily-loaded banner rendered. Shipping on that number would have shipped a measurement bug. FlagMedic answered `FIX` and pointed at the line:
+
+```
+  D3 Sample ratio mismatch (p = 1.6e-6)
+     Configured bold 50% / control 50%, observed bold 1361 (45.6%) / control 1623 (54.4%). bold is under-counted.
+     cause pricing.mjs:31  exits before the exposure on pricing.mjs:33 is recorded, so some visitors are never counted
+        >  31 |     if (!rendered) return null;
+```
+
 Weakness, stated up front: all traffic in the demo is simulated by `scripts/simulate.mjs` (1,600–2,000 visitors per scenario, conversion 8% vs 12%). The experiments themselves are real experiments on Flagsmith Cloud.
 
 ## Use of Flagsmith
