@@ -11,14 +11,12 @@ export function createClient() {
 }
 
 const COPY = {
-  control: 'Get started',
   bold: 'Start building free',
 };
 
 // Renders the pricing page CTA for one visitor and records the exposure.
 export async function renderPricing(flagsmith, userId) {
-  const flag = await flagsmith.getExperimentFlag('plan_cta', userId);
-  const variant = flag.value === 'bold' ? 'bold' : 'control';
+  const variant = 'bold';
   return { variant, cta: COPY[variant] };
 }
 
