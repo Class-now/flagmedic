@@ -31,8 +31,11 @@ export async function snapshot(flag, { src, sentFile, refresh = true } = {}) {
   let sent = null;
   if (sentFile && fs.existsSync(sentFile)) {
     sent = {};
+    // Only compare traffic that was sent well before the results were computed.
+    const asOf = Date.parse(results?.as_of ?? 0) - 60000;
     for (const line of fs.readFileSync(sentFile, 'utf8').split(/\r?\n/).filter(Boolean)) {
       const r = JSON.parse(line);
+      if (!(Date.parse(r.sent_at) < asOf)) continue;
       for (const [k, v] of Object.entries(r.rendered ?? {})) sent[k] = (sent[k] ?? 0) + v;
     }
   }
