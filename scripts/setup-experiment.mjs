@@ -4,7 +4,7 @@
 // Usage: FLAGSMITH_API_KEY=<org key> node scripts/setup-experiment.mjs [--start]
 import { api, ENV_KEY, PROJECT_ID } from '../src/flagsmith.mjs';
 
-const FLAG = process.env.FM_FLAG || 'pricing_cta';
+const FLAG = process.env.FM_FLAG || 'plan_cta';
 const EVENT = process.env.FM_EVENT || 'cta_click';
 
 async function findFeature() {

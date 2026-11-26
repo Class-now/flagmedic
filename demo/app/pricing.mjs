@@ -17,7 +17,7 @@ const COPY = {
 
 // Renders the pricing page CTA for one visitor and records the exposure.
 export async function renderPricing(flagsmith, userId) {
-  const flag = await flagsmith.getExperimentFlag('pricing_cta', userId);
+  const flag = await flagsmith.getExperimentFlag('plan_cta', userId);
   const variant = flag.value === 'bold' ? 'bold' : 'control';
   return { variant, cta: COPY[variant] };
 }

@@ -21,7 +21,7 @@ const pos = argv.filter((a, i) => i > 0 && !a.startsWith('--') && !argv[i - 1]?.
 const opt = (n, d) => { const i = argv.indexOf(`--${n}`); return i >= 0 ? argv[i + 1] : d; };
 const flagSet = (n) => argv.includes(`--${n}`);
 
-const C = process.stdout.isTTY && !process.env.NO_COLOR
+const C = (process.stdout.isTTY || process.env.FM_COLOR) && !process.env.NO_COLOR
   ? { red: (s) => `\x1b[31m${s}\x1b[0m`, green: (s) => `\x1b[32m${s}\x1b[0m`, yellow: (s) => `\x1b[33m${s}\x1b[0m`, bold: (s) => `\x1b[1m${s}\x1b[0m`, dim: (s) => `\x1b[2m${s}\x1b[0m` }
   : { red: String, green: String, yellow: String, bold: String, dim: String };
 

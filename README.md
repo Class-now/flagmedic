@@ -74,7 +74,7 @@ It shows Flagsmith's `chance_to_win` next to its own Beta-posterior estimate, so
 ## A human approves every change
 
 ```
-PROPOSAL p-0001 (pending, risk high): Ship "bold" for pricing_cta and clean up
+PROPOSAL p-0001 (pending, risk high): Ship "bold" for plan_cta and clean up
   approve: flagmedic approve p-0001 --by <you> --reason "..."   reject: flagmedic reject p-0001 --by <you>
 ```
 
@@ -95,8 +95,8 @@ export FLAGSMITH_PROJECT_ID=...
 
 node scripts/setup-experiment.mjs --start                     # flag + keyed variation + metric + experiment
 node scripts/simulate.mjs --app demo/app --users 2000         # synthetic visitors
-node bin/flagmedic.mjs check pricing_cta --src demo/app       # health + decision (+ proposal)
-node bin/flagmedic.mjs watch pricing_cta --src demo/app       # every 5 minutes
+node bin/flagmedic.mjs check plan_cta --src demo/app       # health + decision (+ proposal)
+node bin/flagmedic.mjs watch plan_cta --src demo/app       # every 5 minutes
 node bin/flagmedic.mjs proposals
 node bin/flagmedic.mjs approve p-0001 --by alice --reason "bold wins at 97.6%"
 npm test
