@@ -1,0 +1,9 @@
+# FlagMedic audit log
+
+| time (UTC) | proposal | who | action | detail |
+|---|---|---|---|---|
+| 2026-11-26T09:50:22.989Z | p-0001 | flagmedic | proposed | Ship "bold" for plan_cta and clean up (risk high) |
+| 2026-11-26T09:50:23.090Z | p-0001 | shotaro | rejected | I want to see the split first |
+| 2026-11-26T09:50:26.031Z | p-0002 | flagmedic | proposed | Ship "bold" for plan_cta and clean up (risk high) |
+| 2026-11-26T09:50:26.120Z | p-0002 | shotaro | approved | bold wins at 98.9%, past the planned sample |
+| 2026-11-26T09:50:36.011Z | p-0002 | flagmedic | applied | complete_experiment, open_cleanup_pr |

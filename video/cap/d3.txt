@@ -1,0 +1,15 @@
+FlagMedic  hero_cta  -  experiment #559 "Pricing CTA copy" (running)
+https://app.flagsmith.com/project/54206/environment/WPRAA25nbx2oWTB9TAW9s2/experiments/559  |  2026-11-26T09:50:20.318Z  |  refreshed
+
+HEALTH: 1 problem - do not read these results yet
+  D3 Sample ratio mismatch (p = 1.6e-6)
+     Configured bold 50% / control 50%, observed bold 1361 (45.6%) / control 1623 (54.4%). bold is under-counted. p-value from FlagMedic chi-square.
+     cause pricing.mjs:31  exits before the exposure on pricing.mjs:33 is recorded, so some visitors are never counted
+           30 |     const rendered = await loadHeroBanner(userId);
+        >  31 |     if (!rendered) return null;
+           32 |   }
+     fix   Record the exposure where the variation is decided, before any branch that can leave early.
+
+DECISION: FIX  Measurement is broken; results are not trustworthy until the findings above are fixed.
+
+6 Flagsmith API calls this check. Nothing was changed in Flagsmith.

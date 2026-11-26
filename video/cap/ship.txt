@@ -1,0 +1,15 @@
+FlagMedic  plan_cta  -  experiment #597 "Pricing CTA copy" (running)
+https://app.flagsmith.com/project/54206/environment/WPRAA25nbx2oWTB9TAW9s2/experiments/597  |  2026-11-26T09:50:22.970Z
+
+HEALTH: OK  (warehouse, exposures per variation, conversions, sample ratio, delivery)
+
+DECISION: SHIP bold  bold beats control with 98.9% probability (n = 1036 vs 964).
+   variation   identities  conversions   rate    chance to beat control (Flagsmith / FlagMedic)
+   control            964           81    8.4%
+   bold              1036          126   12.2%   98.9% / 99.7%
+   needed per arm: 901
+
+PROPOSAL p-0001 (pending, risk high): Ship "bold" for plan_cta and clean up
+  approve: flagmedic approve p-0001 --by <you> --reason "..."   reject: flagmedic reject p-0001 --by <you>
+
+5 Flagsmith API calls this check. Nothing was changed in Flagsmith.

@@ -1,0 +1,15 @@
+FlagMedic  trial_cta  -  experiment #558 "Pricing CTA copy" (running)
+https://app.flagsmith.com/project/54206/environment/WPRAA25nbx2oWTB9TAW9s2/experiments/558  |  2026-11-26T09:50:12.621Z  |  refreshed
+
+HEALTH: 1 problem - do not read these results yet
+  D2 No conversions for bold on metric "CTA click"
+     bold: 811 exposed, 0 converted. Metric event: "cta_click".
+     cause pricing.mjs:26  sends "ctaClick" but metric "CTA click" counts "cta_click" (event names are case-sensitive)
+           25 |     // BoldTrialButton: added together with the new copy
+        >  26 |     flagsmith.trackEvent('ctaClick', { identifier: userId });
+           27 |   } else {
+     fix   Send exactly "cta_click" with the same identifier as the exposure.
+
+DECISION: FIX  Measurement is broken; results are not trustworthy until the findings above are fixed.
+
+6 Flagsmith API calls this check. Nothing was changed in Flagsmith.

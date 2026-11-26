@@ -1,0 +1,9 @@
+p-0001  REJECTED  risk high  Ship "bold" for plan_cta and clean up
+   why: bold beats control with 98.9% probability (n = 1036 vs 964).
+   - complete_experiment  {"experiment":597,"flag":"plan_cta"}
+       before {"status":"running","serving":"experiment split"}
+       after  {"rollout_decision":"variant","rollout_variant":37136}
+   - open_cleanup_pr  {"flag":"plan_cta","src":"demo/app","project":"54206","feature":305245}
+       before {"branches":"control / variations"}
+       after  {"hardcode":"bold"}
+   rejected by shotaro at 2026-11-26T09:50:23.088Z - "I want to see the split first"

@@ -4,6 +4,8 @@
 
 Toggle Wars (Flagsmith × WeMakeDevs), **Track 02: AI Agents and Feature Flags**.
 
+**Demo video (3:56):** https://github.com/Class-now/flagmedic/releases/download/v1.0-demo/flagmedic-demo.mp4 — every terminal screen in it is real output from Flagsmith Cloud (experiments #558, #559, #597), rebuilt with `node video/build.mjs`.
+
 Flagsmith's official coding-agent prompt already takes you from an idea to a *started* experiment in minutes. FlagMedic takes over from there: the part where experiments quietly go wrong, and the part nobody does afterwards.
 
 ```
@@ -98,7 +100,7 @@ node scripts/simulate.mjs --app demo/app --users 2000         # synthetic visito
 node bin/flagmedic.mjs check plan_cta --src demo/app       # health + decision (+ proposal)
 node bin/flagmedic.mjs watch plan_cta --src demo/app       # every 5 minutes
 node bin/flagmedic.mjs proposals
-node bin/flagmedic.mjs approve p-0001 --by alice --reason "bold wins at 97.6%"
+node bin/flagmedic.mjs approve p-0001 --by alice --reason "bold wins at 98.9%"
 npm test
 ```
 
@@ -106,4 +108,6 @@ Broken-on-purpose versions of the demo app: `demo/faults/event-name` (D2) and `d
 
 ## Status
 
-Built during the Toggle Wars window (from 2026-11-26). Work in progress.
+Built during the Toggle Wars window (2026-11-26 to 2026-11-29).
+
+End-to-end run recorded in the video: experiment #597 (`plan_cta`, 1,036 vs 964 identities, bold 12.2% vs control 8.4%, 98.9% chance to beat control) was checked, the first proposal rejected, the second approved; FlagMedic completed the experiment serving `bold` and opened cleanup PR [#2](https://github.com/Class-now/flagmedic/pull/2) (3 lines removed, 1 added). An earlier run did the same for `pricing_cta` (#556, PR [#1](https://github.com/Class-now/flagmedic/pull/1)).

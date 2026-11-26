@@ -1,0 +1,15 @@
+$ node scripts/setup-experiment.mjs --start
+created feature 305245
+created variation 37136
+variation { id: 37136, key: 'bold', value: 'bold' }
+created experiment 597
+{
+  "feature": 305245,
+  "variation": 37136,
+  "metric": 556,
+  "experiment": 597,
+  "status": "running"
+}
+
+$ node scripts/simulate.mjs --app demo/app --users 2000 --prefix video1
+{"prefix":"video1","app":"demo\\app","users":2000,"rendered":{"control":964,"bold":1036},"clicked":{"control":81,"bold":126},"sent_at":"2026-11-26T09:47:17.458Z"}
