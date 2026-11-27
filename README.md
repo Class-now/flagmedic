@@ -21,6 +21,15 @@ HEALTH: 1 problem - do not read these results yet
 DECISION: FIX  Measurement is broken; results are not trustworthy until the findings above are fixed.
 ```
 
+## Track 02 at a glance
+
+| Track 02 asks for | Where FlagMedic does it |
+|---|---|
+| Flagsmith CLI, API or MCP server | The Experimentation REST API end to end: read results, refresh, complete the experiment ([Use of Flagsmith](#use-of-flagsmith)). It does not use the MCP server because the server cannot start experiments (Flagsmith docs, "Set Up an Experiment with a Coding Agent"). |
+| Saves real time | A broken metric or a skewed split shows up on the first results refresh, with the file and line, instead of after days of misleading numbers ([Numbers](#numbers-from-the-demo-runs-in-this-repo-synthetic-traffic)). |
+| A human approves changes | Every write (complete the experiment, open the cleanup PR) is a proposal with evidence. A person approves or rejects it, and `.flagmedic/AUDIT.md` logs every step ([A human approves every change](#a-human-approves-every-change)). |
+| Clear output | One screen per check: `HEALTH`, the line of code that causes the problem, and a one-word decision: `FIX`, `SHIP`, `STOP` or `CONTINUE` ([The decision](#the-decision)). |
+
 ## Numbers (from the demo runs in this repo, synthetic traffic)
 
 | | |
