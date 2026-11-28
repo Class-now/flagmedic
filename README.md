@@ -4,7 +4,7 @@
 
 Toggle Wars (Flagsmith × WeMakeDevs), **Track 02: AI Agents and Feature Flags**.
 
-**Demo video (3:56):** https://github.com/Class-now/flagmedic/releases/download/v1.0-demo/flagmedic-demo.mp4 — every terminal screen in it is real output from Flagsmith Cloud (experiments #558, #559, #597), rebuilt with `node video/build.mjs`.
+**Demo video (2:17):** https://github.com/Class-now/flagmedic/releases/download/v1.0-demo/flagmedic-demo-short.mp4 — every terminal screen in it is real output from Flagsmith Cloud (experiments #558, #559, #597), rebuilt with `FM_SCENES=scenes-short.mjs FM_OUT=flagmedic-demo-short.mp4 node video/build.mjs`. The longer narrated cut (3:56) is [flagmedic-demo.mp4](https://github.com/Class-now/flagmedic/releases/download/v1.0-demo/flagmedic-demo.mp4).
 
 Flagsmith's official coding-agent prompt already takes you from an idea to a *started* experiment in minutes. FlagMedic takes over from there: the part where experiments quietly go wrong, and the part nobody does afterwards.
 
