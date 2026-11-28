@@ -5,11 +5,13 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
-import { scenes, VOICE } from './scenes.mjs';
+// FM_SCENES=scenes-short.mjs FM_OUT=flagmedic-demo-short.mp4 builds the under-3-minute cut into video/out/short/.
+const { scenes, VOICE, RATE = '+10%' } = await import(`./${process.env.FM_SCENES || 'scenes.mjs'}`);
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const cap = path.join(here, 'cap');
-const out = path.join(here, 'out');
+const outRoot = path.join(here, 'out');
+const out = process.env.FM_SCENES ? path.join(outRoot, 'short') : outRoot;
 fs.mkdirSync(out, { recursive: true });
 const require = createRequire(import.meta.url);
 const { chromium } = require(process.env.PLAYWRIGHT_PATH || 'playwright');
@@ -94,17 +96,18 @@ for (const s of scenes) {
   const mp4 = path.join(out, `${s.id}.mp4`);
   await page.setContent(html(s));
   await page.screenshot({ path: png });
-  execFileSync('edge-tts', ['--voice', VOICE, '--rate', '+10%', '--text', s.say, '--write-media', mp3], { stdio: 'ignore' });
+  execFileSync('edge-tts', ['--voice', VOICE, '--rate', RATE, '--text', s.say, '--write-media', mp3], { stdio: 'ignore' });
+  const said = Number(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', mp3], { encoding: 'utf8' }).trim());
   execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-loop', '1', '-framerate', '30', '-i', png, '-i', mp3,
-    '-af', 'adelay=400|400,apad=pad_dur=0.8', '-c:v', 'libx264', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-r', '30',
-    '-c:a', 'aac', '-b:a', '160k', '-ar', '48000', '-shortest', mp4]);
+    '-af', 'adelay=300|300,apad', '-c:v', 'libx264', '-tune', 'stillimage', '-pix_fmt', 'yuv420p', '-r', '30',
+    '-c:a', 'aac', '-b:a', '160k', '-ar', '48000', '-t', (said + 0.9).toFixed(2), mp4]);
   parts.push(mp4);
   console.log('scene', s.id);
 }
 await browser.close();
 const list = path.join(out, 'list.txt');
 fs.writeFileSync(list, parts.map((p) => `file '${p.replace(/\\/g, '/')}'`).join('\n'));
-const final = path.join(out, 'flagmedic-demo.mp4');
+const final = path.join(outRoot, process.env.FM_OUT || 'flagmedic-demo.mp4');
 execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', list, '-c', 'copy', '-movflags', '+faststart', final]);
 const dur = execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', final], { encoding: 'utf8' }).trim();
 console.log(final, `${Number(dur).toFixed(1)}s`);
